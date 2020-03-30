@@ -19,10 +19,13 @@ h2:hover {
 }
 marquee {
     color: rgb(216, 16, 216);
-    font-size: 20px;
+    font-size: 15px;
     font-weight: 200;
 }
-
+marquee:hover {
+    color: white;
+    font-size: 23px;
+}
 h3 {
     text-align: center;
     color: lime;
