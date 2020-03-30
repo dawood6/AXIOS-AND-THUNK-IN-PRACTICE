@@ -17,6 +17,10 @@ h2 {
 h2:hover {
     color: dodgerblue;
 }
+marquee {
+    color: rgb(216, 16, 216);
+}
+
 h3 {
     text-align: center;
     color: lime;
