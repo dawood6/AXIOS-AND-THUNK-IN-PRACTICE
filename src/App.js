@@ -1,26 +1,37 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import './App.css'
+import AuthMiddleware from "./Store/middlewares/authMiddleware";
+class App extends Component {
+  state = {
+    posts: []
+  };
+  componentWillReceiveProps(nextProps) {
+      console.log(nextProps);
+      
+    this.setState({ posts: nextProps.posts });
+  }
+  componentDidMount() {
+    console.log("PROPS OBJECT", this.props);
+    this.props.postLoading();
+  }
+  render() {
+    const { posts } = this.state;
+    return (
+      <div>
+          <h1>Using Axios And Thunk In REACT-REDUX</h1>
+          <h2>Using JSONPLACEHOLDER API</h2>
+          {posts.map((item) => {
+            return <h3>UserId:&nbsp;&nbsp;{item.userId} <br /> Id:&nbsp;&nbsp;{item.id} <br /> Title:&nbsp;&nbsp;{item.title} <br /> Body:&nbsp;&nbsp;{item.body}</h3>
+          })}
+      </div>
+    );
+  }
 }
-
-export default App;
+const mapStateToProps = ({ authReducer: { posts } }) => ({
+  posts
+});
+const mapDispatchToProps = dispatch => ({
+  postLoading: () => dispatch(AuthMiddleware.postLoadingMiddleware())
+});
+export default connect(mapStateToProps, mapDispatchToProps)(App);
