@@ -19,6 +19,7 @@ h2:hover {
 }
 marquee {
     color: rgb(216, 16, 216);
+    font-size: 20px;
 }
 
 h3 {
